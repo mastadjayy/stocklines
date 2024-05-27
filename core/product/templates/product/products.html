@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Products{% endblock title %}
+
+{% block content %}
+
+<!-- Main page content-->
+<div class="container-xl px-4">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="page-header-content">
+            <div class="row align-items-center pt-3">
+                <div class="col-auto mb-3">
+                    <h1 class="page-header-title">
+                        <div class="page-header-icon"><a href="{% url 'referentiel' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                        </svg></a></div>
+                        Produits
+                    </h1>
+                </div>
+                <div class="col-12 col-xl-auto mb-3">
+                    <a href="{% url 'product:product_form' %}" class="btn btn-sm btn-light text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                        </svg>
+                        &nbsp;
+                        Nouveau produit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="row">
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                {#<th scope="col">#</th>#}
+                {#<th scope="col">Produit</th>#}
+            </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>
+                        <a href="{% url 'product:product_detail' product.public_id %}" class="text-reset text-decoration-none">
+                            {{ product.product_name }}
+                        </a>
+                    </td>
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>{% comment %} End Row Cards {% endcomment %}
+
+</div>
+
+{% endblock content %}

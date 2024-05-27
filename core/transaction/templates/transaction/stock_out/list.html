@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <!-- DataTables Bootstrap 5 -->
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.css" rel="stylesheet">
+    <!--DataTables Buttons Bootstrap 5 -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+
+    <script src="{% static 'js/jquery-3.7.0.js' %}"></script>
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js"></script>
+{% endblock css %}
+
+{% block title %}Sorties Magasin{% endblock title %}
+
+{% block content %}
+<style>
+    .active>.page-link,.active>.page-link:active{color:#219653;background-color: #fff;border-color: #219653;}
+    .dataTables_length{float: right !important;}
+    .btn-light{color:gray;padding-left:0;padding-bottom:0.3rem;}
+    .btn-light,.btn-light:hover,.btn-light:active{background-color:transparent;border-color:transparent;}
+</style>
+
+<div class="container-xl px-4">
+
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="page-header-content">
+            <div class="row align-items-center pt-3">
+                <div class="col-auto mb-3">
+                    <h1 class="page-header-title">
+                        
+                        Sortie Magasin
+                    </h1>
+                </div>
+                <div class="col-12 col-xl-auto mb-3">
+                    <a href="{% url 'transaction:stock_out' %}" class="btn btn-sm text-primary fw-bold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                        </svg>
+                        &nbsp;
+                        Nouvelle Sortie
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="row">
+        <div class="mb-4">
+
+            <table id="stockOutDataTable" class="table table-striped nowrap">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Type transaction</th>
+                        <th>Produit</th>
+                        <th>Campagne</th>
+                        <th>Client</th>
+                        <th>Flux <br>(Import / Export)</th>
+                        <th>Magasin</th>
+                        <th>PO Number</th>
+                        <th>Shipment number</th>
+                        <th>Quantité</th>
+                        <th>Poids théorique (T)</th>
+                        <th>Date création</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in stock_out_list %}
+                    <tr>
+                        <td>{{ stock.display_id }}</td>
+                        <td>{{ stock.transaction_type }}</td>
+                        <td>{{ stock.product }}</td>
+                        <td>{{ stock.campagne }}</td>
+                        <td>{{ stock.client }}</td>
+                        <td>{{ stock.flux }}</td>
+                        <td>{{ stock.warehouse }}</td>
+                        <td>{{ num_bordereau }}</td>
+                        <td>{{ stock.shipment_num }}</td>
+                        <td>{{ stock.quantity }}</td>
+                        <td>{{ stock.poids_theorique }}</td>
+                        <td>{{ stock.created|date:"d m Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#stockOutDataTable').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16"><path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/></svg> Export Excel',
+                    className: 'btn btn-light',
+                    titleAttr: 'Export Excel',
+                },
+                {
+                    extend: 'pdf',
+                    text: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/><path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/></svg> Export PDF',
+                    className: 'btn btn-light',
+                    titleAttr: 'Export PDF',
+                }
+            ],
+            scrollX: true,
+        });
+    });
+</script>
+
+{% endblock content %}
+
+{% block js %}
+    <!-- JQuery -->
+    
+    <!-- Datatables JS -->
+    {% comment %} <script src="{% static 'vendor/datatables/datatables.min.js' %}"></script> {% endcomment %}
+    
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+{% endblock %}

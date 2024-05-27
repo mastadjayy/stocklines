@@ -1,0 +1,135 @@
+<style>
+    h5 {
+        color:#008000;
+        font-family:'Open Sans',sans-serif;
+        font-weight:600;
+        
+    }
+    .card-body {
+        padding:0.8rem;
+    }
+    a {
+        color:#000000;font-size:0.875rem;
+    }
+    a:hover,a:focus{text-decoration: underline;}
+</style>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Produits</h5>
+            <span class="#">
+                <a href="{% url 'product:product_form' %}">
+                    Nouveau produit
+                </a>
+            </span><br>
+            <span class="#">
+                <a href="{% url 'product:products' %}">
+                    Tous les produits
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Clients</h5>
+            <span class="#">
+                <a href="{% url 'client:client_form' %}">
+                    Nouveau client
+                </a>
+            </span><br>
+            <span class="#">
+                <a href="{% url 'client:clients' %}">
+                    Tous les clients
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Magasins</h5>
+                <span class="#">
+                    <a href="{% url 'warehouse:warehouse_form' %}">
+                        Nouveau magasin
+                    </a>
+                </span><br>
+                <span class="#">
+                    <a href="{% url 'warehouse:warehouses' %}">
+                        Tous les magasins
+                    </a>
+                </span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Transporteurs</h5>
+            <span class="#">
+                <a href="{% url 'carrier:carrier_create' %}">
+                    Nouveau transporteur
+                </a>
+            </span><br>
+            <span class="#">
+                <a href="{% url 'carrier:carriers' %}">
+                    Tous les transporteurs
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Emballages</h5>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Usines</h5>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Grades</h5>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Marques</h5>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Qualités</h5>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+    <div class="card h-100" href="#">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2">Conformité</h5>
+        </div>
+    </div>
+</div>

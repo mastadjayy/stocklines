@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}New Carrier{% endblock title %}
+
+{% block content %}
+
+    <!-- Main page content-->
+    <div class="container-xl px-4">
+        <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><a href="{% url 'referentiel' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                            </svg></a></div>
+                            Transporteur
+                        </h1>
+                    </div>
+                    <div class="col-12 col-xl-auto mb-3">
+                        <a href="{% url 'carrier:carriers' %}" class="btn btn-sm btn-light text-primary">Tous les transporteurs</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="row">
+            <form method="post" action="{% url 'carrier:carrier_create' %}" class="">
+                {% csrf_token %}
+        
+                <div class="row gx-3">
+                    <div class="mb-3 col-md-6">
+                        {{ form.carrier_name|as_crispy_field }}
+                    </div>
+                </div>
+        
+                <button type="submit" class="btn btn-success">Valider</button>
+            </form>
+
+        </div>{% comment %} End Row Cards {% endcomment %}
+
+    </div>
+
+
+{% endblock content %}

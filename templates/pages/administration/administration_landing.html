@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Administration{% endblock title %}
+
+{% block content %}
+
+<main>
+    <!-- Main page content-->
+    <div class="container-xl px-4">        
+        <h4 class="mb-0 mt-5">Administration</h4>
+        <hr class="mt-2 mb-4">
+        <div class="row">
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">General</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Saisie</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Gestion des poids</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Gestion des dates</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Gestion des sorties par entité</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Gestion des lots</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Opérations dans les entrepôts</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Options</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="#">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Utilisateurs</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <a class="card lift lift-sm h-100" href="{%url 'referentiel'%}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-2">Référentiel</h5>
+                    </div>
+                </a>
+            </div>
+
+        </div>{% comment %} End Row Cards {% endcomment %}
+
+    </div>
+</main>
+
+
+{% endblock content %}

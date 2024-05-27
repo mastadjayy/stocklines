@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Referentiel{% endblock title %}
+
+{% block content %}
+
+<main>
+    <!-- Main page content-->
+    <div class="container-xl px-4">        
+        <h4 class="mb-0 mt-5">Référentiel</h4>
+        <hr class="mt-2 mb-4">
+        <div class="row">
+            {% include "partials/administration/referentiel_list.html" %}
+        </div>{% comment %} End Row Cards {% endcomment %}
+    </div>
+</main>
+
+{% endblock content %}

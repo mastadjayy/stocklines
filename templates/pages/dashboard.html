@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+  <script src="{% static 'js/chart.umd.min.js' %}"></script>
+{% endblock css %}
+
+{% block title %} Dashboard{% endblock title %}
+
+{% block content %}
+
+
+
+
+<div class="container-xl px-4 mt-3">
+    <!-- Cards Stats -->
+    {% include 'partials/cards_stats.html' %}
+    <!-- End of Cards Stats -->
+
+    <!-- Cards Charts -->
+    {% comment %} {% include 'partials/cards_charts.html' %} {% endcomment %}
+
+    <div class="row">
+
+      <!-- Stock In Chart -->
+      {% include "partials/stockInChart.html" %}
+
+      <!-- Stock Out Chart -->
+      {% include "partials/stockOutChart.html" %}
+
+    </div>
+    <!-- End of Cards Charts -->
+</div>
+
+
+<script>
+  // Initialize Chart 1 using data from context
+  var data_for_chart1 = "{{ stock_in_count|safe }}";
+  var labels_for_chart1 = {{ stock_in_months|safe }};
+
+  var config1 = {
+      type: 'line',
+      data: {
+          labels: labels_for_chart1,
+          datasets: [{
+              label: 'Entrées',
+              data: JSON.parse(data_for_chart1),
+              fill: true,
+              tension: 0.3
+          }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Mois'
+            },
+            grid: {
+              drawOnChartArea: false
+            }
+          }
+        }
+      }
+  };
+
+  var myChart1 = new Chart(document.getElementById('stockInChart'), config1);
+
+  // Initialize Chart 2 using data from context
+  var data_for_chart2 = "{{ stock_out_count|safe }}";
+  var labels_for_chart2 = {{ stock_out_months|safe }};
+
+  var config2 = {
+      type: 'line',
+      data: {
+          labels: labels_for_chart2,
+          datasets: [{
+              label: 'Sorties',
+              data: JSON.parse(data_for_chart2),
+              fill: true,
+              tension: 0.3,
+              borderColor: 'rgb(75, 192, 192)',
+              backgroundColor:'rgb(75, 192, 192, 0.3)',
+          }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Mois'
+            },
+            grid: {
+              drawOnChartArea: false
+            }
+          }
+        }
+      },
+  };
+
+  var myChart2 = new Chart(document.getElementById('stockOutChart'), config2);
+</script>
+
+{% endblock content %}

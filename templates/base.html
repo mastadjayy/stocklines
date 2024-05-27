@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockline | {% block title %}Home{% endblock title %}</title>
+    {% include 'scripts_import/top.html' %}
+    {% block css %}{% endblock css %}
+</head>
+<body class="nav-fixed">
+    {% include 'partials/navbar.html' %}
+    <div id="layoutSidenav">
+        
+        <div id="layoutSidenav_nav">
+            {% include 'partials/sidebar.html' %}
+        </div>
+
+        <div id="layoutSidenav_content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+    </div>
+
+        
+
+    {% include 'scripts_import/bottom.html' %}
+    {% block js %} {% endblock %}
+</body>
+</html>

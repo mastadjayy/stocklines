@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-xl px-4">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="page-header-content">
+            <div class="row align-items-center pt-3">
+                <div class="col-auto mb-3">
+                    <h1 class="page-header-title">
+                        <span>Entrées Magasin</span>
+                        <span>&nbsp;>&nbsp;</span>
+                        <span>Nouvelle Entrée</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <form method="post" action="{% url 'transaction:stock_in' %}">
+            {% csrf_token %}
+            <div class="row">
+                {% comment %} Form Markup {% endcomment %}
+                <div class="col-md-9 mb-4">
+                    {% comment %} Client Card {% endcomment %}
+                    <div class="card mb-4">
+                        <div class="card-header">Client</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">{{ form.client|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.product|as_crispy_field }}</div>
+                                <div class="col">{{ form.quantity|as_crispy_field }}</div>
+                                <div class="col">{{ form.warehouse|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.type_gestion|as_crispy_field }}</div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.campagne|as_crispy_field }}</div>
+                                <div class="col">{{ form.date_entry|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.num_contrat|as_crispy_field }}</div>
+                                <div class="col">{{ form.comment|as_crispy_field }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% comment %} Transporteur Card {% endcomment %}
+                    <div class="card mb-4">
+                        <div class="card-header">Transporteur</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">{{ form.carrier|as_crispy_field }}</div>
+                                <div class="col">{{ form.num_immatricule|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.num_bordereau|as_crispy_field }}</div>
+                                <div class="col">{{ form.num_remorque|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.nom_superviseur|as_crispy_field }}</div>
+                                <div class="col">{{ form.nom_gardien|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.nom_chauffeur|as_crispy_field }}</div>
+                                <div class="col">{{ form.permis_conduire|as_crispy_field }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% comment %} Contenant Card {% endcomment %}
+                    <div class="card mb-4">
+                        <div class="card-header">Contenant</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">{{ form.num_lot|as_crispy_field }}</div>
+                                <div class="col">{{ form.quality|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.grade|as_crispy_field }}</div>
+                                <div class="col">{{ form.conformity|as_crispy_field }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form.poids_theorique|as_crispy_field }}</div>
+                                <div class="col">{{ form.poids_reel|as_crispy_field }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% comment %} Form Buttons {% endcomment %}
+                <div class="col-md-3 mb-4">
+                    <div class="card border-0 mb-4 sticky-top" style="top: 80px;box-shadow:None;">
+                        <div class="card-body p-2" style="font-size: .75rem;">
+                            <div class="d-flex align-items-center">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                </div>
+                                <div class="ms-4">
+                                    <a href="/warehouse/entree-magasin/list/" class="btn btn-light">Annuler</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+        </form>
+    </div>
+</div>
+{% endblock content %}
